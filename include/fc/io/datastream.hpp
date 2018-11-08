@@ -90,7 +90,7 @@ class datastream<size_t> {
   private:
      size_t _size;
 };
-#ifndef WINDOWS
+#ifndef _MSC_VER
 template<typename ST>
 inline datastream<ST>& operator<<(datastream<ST>& ds, const __int128& d) {
   ds.write( (const char*)&d, sizeof(d) );

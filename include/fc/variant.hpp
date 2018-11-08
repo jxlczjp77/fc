@@ -98,7 +98,12 @@ namespace fc
    void from_variant( const variant& var,  uint32_t& vo );
    void to_variant( const int32_t& var,  variant& vo );
    void from_variant( const variant& var,  int32_t& vo );
-#ifndef WINDOWS
+#ifdef _MSC_VER
+   void to_variant(const uint128_t& var, variant& vo);
+   void from_variant(const variant& var, uint128_t& vo);
+   void to_variant(const int128_t& var, variant& vo);
+   void from_variant(const variant& var, int128_t& vo);
+#else
    void to_variant( const unsigned __int128& var,  variant& vo );
    void from_variant( const variant& var,  unsigned __int128& vo );
    void to_variant( const __int128& var,  variant& vo );
@@ -118,8 +123,8 @@ namespace fc
 
    template<typename K, typename... T>
    void to_variant( const fc::flat_map<K,T...>& var,  variant& vo );
-   template<typename K, typename... T>
-   void from_variant( const variant& var, fc::flat_map<K,T...>& vo );
+   template<typename K, typename T, typename... A>
+   void from_variant( const variant& var, flat_map<K, T, A...>& vo );
 
    template<typename K, typename T>
    void to_variant( const std::map<K,T>& var,  variant& vo );

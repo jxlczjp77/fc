@@ -620,7 +620,4 @@
       <Filter>源文件\crypto</Filter>
     </ClCompile>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="..\src\git_revision.cpp.in" />
-  </ItemGroup>
 </Project>

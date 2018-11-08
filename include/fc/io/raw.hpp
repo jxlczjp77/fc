@@ -759,11 +759,13 @@ namespace fc {
 
 
     template<typename Stream, typename T> void pack( Stream& s, const boost::multiprecision::number<T>& n ) {
-      static_assert( sizeof( n ) == (std::numeric_limits<boost::multiprecision::number<T>>::digits+1)/8, "unexpected padding" );
+      // When used at fixed precision, the size of this type is always one machine word larger than you would expect for an N-bit integer
+      static_assert( sizeof( n ) == (std::numeric_limits<boost::multiprecision::number<T>>::digits+1)/8 + sizeof(long long), "unexpected padding" );
       s.write( (const char*)&n, sizeof(n) );
     }
     template<typename Stream, typename T> void unpack( Stream& s,  boost::multiprecision::number<T>& n ) {
-      static_assert( sizeof( n ) == (std::numeric_limits<boost::multiprecision::number<T>>::digits+1)/8, "unexpected padding" );
+      // When used at fixed precision, the size of this type is always one machine word larger than you would expect for an N-bit integer
+      static_assert( sizeof( n ) == (std::numeric_limits<boost::multiprecision::number<T>>::digits+1)/8 + sizeof(long long), "unexpected padding" );
       s.read( (char*)&n, sizeof(n) );
     }
 
@@ -772,7 +774,7 @@ namespace fc {
        pack( s, static_cast<UInt<128>>(n >> 128) );
     }
     template<typename Stream> void unpack( Stream& s,  UInt<256>& n ) {
-       UInt<128> tmp[2];
+       UInt<128> tmp[2] = {{0, 0}};
        unpack( s, tmp[0] );
        unpack( s, tmp[1] );
        n = tmp[1];

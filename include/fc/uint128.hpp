@@ -9,6 +9,13 @@
 #ifdef _MSC_VER
   #pragma warning (push)
   #pragma warning (disable : 4244)
+#include <boost/multiprecision/cpp_int.hpp>
+using int128_t = boost::multiprecision::int128_t;
+using b_uint128_t = boost::multiprecision::uint128_t;
+#else
+using int128_t = __int128;
+using uint128_t = unsigned __int128;
+using b_uint128_t = unsigned __int128;
 #endif //// _MSC_VER
 
 namespace fc
@@ -32,13 +39,33 @@ namespace fc
       uint128( uint64_t _h, uint64_t _l )
       :hi(_h),lo(_l){}
       uint128( const fc::bigint& bi );
-#ifndef WINDOWS
+#ifdef _MSC_VER
+	  explicit uint128(int128_t i) :hi(i >> 64), lo(i) { }
+	  explicit uint128(b_uint128_t i) :hi(i >> 64), lo(i) { }
+#else
       explicit uint128( unsigned __int128 i ):hi( i >> 64 ), lo(i){ }
 #endif
       operator std::string()const;
       operator fc::bigint()const;
-#ifndef WINDOWS
-      explicit operator unsigned __int128()const {
+#ifdef _MSC_VER
+	  explicit operator int128_t()const {
+		  int128_t result(hi);
+		  result <<= 64;
+		  return result | lo;
+	  }
+	  explicit operator b_uint128_t()const {
+		  b_uint128_t result(hi);
+		  result <<= 64;
+		  return result | lo;
+	  }
+	  explicit operator uint64_t()const {
+		  return this->to_uint64();
+	  }
+	  explicit operator int64_t()const {
+		  return (int64_t)this->to_uint64();
+	  }
+#else
+	  explicit operator unsigned __int128()const {
          unsigned __int128 result(hi);
          result <<= 64;
          return result | lo;
