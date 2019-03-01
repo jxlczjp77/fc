@@ -1,4 +1,4 @@
-#include <fc/log/console_appender.hpp>
+﻿#include <fc/log/console_appender.hpp>
 #include <fc/log/log_message.hpp>
 #include <fc/string.hpp>
 #include <fc/variant.hpp>
@@ -22,9 +22,11 @@ namespace fc {
      config                      cfg;
      boost::mutex                log_mutex;
      color::type                 lc[log_level::off+1];
-     bool                        use_syslog_header{getenv("JOURNAL_STREAM")};
-#ifdef WIN32
-     HANDLE                      console_handle;
+#ifndef WIN32
+	 bool                        use_syslog_header{ getenv("JOURNAL_STREAM") };
+#else
+	 bool                        use_syslog_header{ getenv("JOURNAL_STREAM") != nullptr };
+	 HANDLE                      console_handle;
 #endif
    };
 
