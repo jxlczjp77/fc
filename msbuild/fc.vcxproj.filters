@@ -460,9 +460,6 @@
     <ClCompile Include="..\src\real128.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\shared_ptr.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\string.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -617,6 +614,9 @@
       <Filter>源文件\network\http</Filter>
     </ClCompile>
     <ClCompile Include="..\src\crypto\elliptic_r1.cpp">
+      <Filter>源文件\crypto</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\crypto\elliptic_webauthn.cpp">
       <Filter>源文件\crypto</Filter>
     </ClCompile>
   </ItemGroup>

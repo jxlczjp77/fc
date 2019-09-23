@@ -222,6 +222,7 @@
     <ClCompile Include="..\src\crypto\elliptic_impl_pub.cpp" />
     <ClCompile Include="..\src\crypto\elliptic_openssl.cpp" />
     <ClCompile Include="..\src\crypto\elliptic_r1.cpp" />
+    <ClCompile Include="..\src\crypto\elliptic_webauthn.cpp" />
     <ClCompile Include="..\src\crypto\hex.cpp" />
     <ClCompile Include="..\src\crypto\openssl.cpp" />
     <ClCompile Include="..\src\crypto\private_key.cpp" />
@@ -256,7 +257,6 @@
     <ClCompile Include="..\src\network\udp_socket.cpp" />
     <ClCompile Include="..\src\network\url.cpp" />
     <ClCompile Include="..\src\real128.cpp" />
-    <ClCompile Include="..\src\shared_ptr.cpp" />
     <ClCompile Include="..\src\string.cpp" />
     <ClCompile Include="..\src\time.cpp" />
     <ClCompile Include="..\src\uint128.cpp" />
