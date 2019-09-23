@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <stdint.h>
 #include <fc/string.hpp>
 #include <fc/optional.hpp>
